@@ -1,8 +1,8 @@
-package LabirintoLunar;
+package LabirintoLunar.Entidades;
 
 /**
- * Classe abstrata que representa um NPC (personagem não jogável).
- * NPCs podem ser inimigos ou outros personagens encontrados no labirinto.
+ * Classe abstrata que representa um NPC (personagem não jogável) no labirinto.
+ * NPCs podem ser inimigos ou figuras com quem a heroína interage.
  */
 public abstract class NPC extends Entidade {
 
@@ -11,10 +11,10 @@ public abstract class NPC extends Entidade {
     /**
      * Construtor do NPC.
      *
-     * @param nome Nome do NPC.
+     * @param nome    Nome do NPC.
      * @param vidaMax Vida máxima do NPC.
-     * @param forca Força do NPC.
-     * @param ouro Quantidade de ouro que o NPC possui.
+     * @param forca   Força de ataque do NPC.
+     * @param ouro    Quantidade de ouro que o NPC carrega.
      */
     public NPC(String nome, int vidaMax, int forca, int ouro) {
         super(nome, vidaMax, forca);
@@ -22,9 +22,8 @@ public abstract class NPC extends Entidade {
     }
 
     /**
-     * Obtém a quantidade de ouro do NPC.
-     *
-     * @return Quantidade de ouro.
+     * Devolve a quantidade de ouro que o NPC carrega.
+     * @return Ouro.
      */
     public int getOuro() {
         return ouro;
@@ -32,7 +31,6 @@ public abstract class NPC extends Entidade {
 
     /**
      * Define a quantidade de ouro do NPC.
-     *
      * @param ouro Novo valor de ouro.
      */
     public void setOuro(int ouro) {
@@ -40,12 +38,18 @@ public abstract class NPC extends Entidade {
     }
 
     /**
-     * Mostra os detalhes do NPC, incluindo o ouro.
+     * Mostra detalhes do NPC na consola.
      */
     @Override
     public void mostrarDetalhes() {
         super.mostrarDetalhes();
-        System.out.println("\uD83D\uDCB0 Ouro: " + ouro);
+        System.out.println("💰 Ouro: " + ouro);
         System.out.println("--------------------------------");
     }
+
+    /**
+     * Método abstrato que representa uma introdução falada do NPC ao iniciar o encontro.
+     * Cada subclasse deve implementar esta apresentação.
+     */
+    public abstract void introduzir();
 }

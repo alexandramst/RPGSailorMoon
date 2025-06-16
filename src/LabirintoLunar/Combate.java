@@ -1,4 +1,4 @@
 package LabirintoLunar;
 
-public class ItemLoja {
+public class Combate {
 }
