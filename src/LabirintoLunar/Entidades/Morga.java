@@ -10,7 +10,7 @@ public class Morga extends NPC {
      * Define vida, força e ouro específicos para a Morga.
      */
     public Morga() {
-        super("Morga", 40, 8, 10); // vida 40, força 8, ouro 10
+        super("Morga", 40, 8, 10); //vida 40, força 8, ouro 10
     }
 
     /**

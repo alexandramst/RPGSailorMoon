@@ -19,7 +19,7 @@ public class Labirinto {
         // Criação das salas (nomes e descrições à tua escolha)
         Sala vendedor = new Sala("Sala do Vendedor", "O vendedor misterioso está aqui! Faz as tuas compras...", TipoEvento.VENDEDOR);
         Sala salaA = new Sala("Biblioteca Sinistra", "Corredor escuro e silencioso.", TipoEvento.SALA_VAZIA);
-        Sala salaB = new Sala("Escola das Sailors", "Uma sala húmida e fria.", TipoEvento.SALA_VAZIA);
+        Sala salaB = new Sala("Escola das Sailors", "Uma sala húmida e fria. O que se passa aqui?", TipoEvento.SALA_VAZIA);
         Sala salaC = new Sala("Parque Sombrio", "Ouves ecos de longe.", TipoEvento.SALA_VAZIA);
         Sala salaD = new Sala("Quarto da Bunny", "Luz ténue no chão.", TipoEvento.SALA_VAZIA);
         Sala salaE = new Sala("Sala Mistica", "Paredes cobertas de símbolos.", TipoEvento.SALA_VAZIA);
@@ -47,11 +47,9 @@ public class Labirinto {
         this.salaAtual = vendedor;
     }
 
-    /**
-     * Obtém a sala onde o jogador se encontra.
-     * @return Sala atual.
-     */
+    //Obtém a sala onde o jogador está
     public Sala getSalaAtual() {
+
         return salaAtual;
     }
 
@@ -60,6 +58,7 @@ public class Labirinto {
      * @param sala Nova sala atual.
      */
     public void setSalaAtual(Sala sala) {
+
         this.salaAtual = sala;
     }
 
@@ -68,6 +67,7 @@ public class Labirinto {
      * @return true se for a sala final.
      */
     public boolean chegouAoFinal() {
+
         return salaAtual == salaFinal;
     }
 }

@@ -1,6 +1,8 @@
 package LabirintoLunar.Itens;
 
 import java.util.ArrayList;
+
+import LabirintoLunar.Cores.ConsoleColors;
 import LabirintoLunar.Enum.TipoHeroina;
 
 /**
@@ -54,7 +56,7 @@ public class ArmaPrincipal extends ItemHeroina {
                         "Ataque: " + ataque + "\n" +
                         "Ataque Especial: " + ataqueEspecial + "\n" +
                         "Permitido para: \n");
-        System.out.println("⋆☆✮✪✮☆⋆");
+        System.out.println(ConsoleColors.YELLOW_BOLD_BRIGHT +"⋆☆✮✪✮☆⋆ \n" + ConsoleColors.RESET);
         if (heroinasPermitidas == null || heroinasPermitidas.isEmpty()) {
             System.out.println("Qualquer heroína");
         } else {

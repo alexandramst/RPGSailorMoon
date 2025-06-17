@@ -1,14 +1,19 @@
 package LabirintoLunar.Jogo;
 
+import LabirintoLunar.Audio.Audio;
+import LabirintoLunar.Cores.ConsoleColors;
 import LabirintoLunar.Entidades.*;
 import LabirintoLunar.Itens.Consumivel;
 import LabirintoLunar.Itens.Pocao;
 import LabirintoLunar.Enum.DificuldadeJogo;
 import LabirintoLunar.Enum.Direcao;
 import LabirintoLunar.Enum.TipoEvento;
+import LabirintoLunar.Tools.FileTools;
 
+import java.io.FileNotFoundException;
 import java.util.*;
 
+import static LabirintoLunar.Cores.ConsoleColors.RED_BOLD;
 import static java.lang.Thread.sleep;
 
 /**
@@ -41,26 +46,28 @@ public class Jogo {
     /**
      * Inicia o fluxo do jogo: cria personagem, entra no labirinto e gere o ciclo principal.
      */
-    public void iniciarJogo() {
+    public void iniciarJogo() throws InterruptedException, FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
         criarPersonagem(scanner);
 
 
         while (true) {
+            Audio.playMusic("AudioFiles/NavegantesDa LuaAbertura.wav");
 
-            System.out.println("\n🌙 *.*.* INÍCIO DO LABIRINTO *.*.* 🌙");
-
-            System.out.println("\n｡ ₊°༺❤\uFE0E༻°₊ ｡｡ ₊°༺❤\uFE0E༻°₊ ｡｡ ₊°༺❤\uFE0E༻°₊ ｡\n");
-
-            System.out.println("\n Após um estranho eclipse, as forças sombrias tomaram conta da Galáxia do Vazio.");
-
-            System.out.println("\n A única esperança está nas heroínas mágicas, capazes de encontrar o Portal da Lua e restaurar a luz.");
-
-            System.out.println("\n Para salvar o mundo, terás de enfrentar perigos, armadilhas e inimigos ocultos neste labirinto misterioso.");
-
-            System.out.println("\n Prepara-te Sailor! A tua aventura começa agora...\n");
-
-            System.out.println("\n｡ ₊°༺❤\uFE0E༻°₊ ｡｡ ₊°༺❤\uFE0E༻°₊ ｡｡ ₊°༺❤\uFE0E༻°₊ ｡\n");
+            System.out.println(ConsoleColors.CYAN_BOLD + "\n🌙 *.*.* INÍCIO DO LABIRINTO *.*.* 🌙" + ConsoleColors.RESET);
+            sleep(500);
+            System.out.println(ConsoleColors.RED_BOLD + "\n｡ ₊°༺❤\uFE0E༻°₊ ｡｡ ₊°༺❤\uFE0E༻°₊ ｡｡ ₊°༺❤\uFE0E༻°₊ ｡\n"+ ConsoleColors.RESET);
+            sleep(500);
+            System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT +"\n Depois de um estranho Eclipse, as forças sombrias tomaram conta da Galáxia do Vazio." + ConsoleColors.RESET);
+            sleep(500);
+            System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT +"\n A esperança está nas nossas Sailors mágicas, as únicas capazes de encontrar o Portal da Lua e trazer a luz de volta." + ConsoleColors.RESET);
+            sleep(500);
+            System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT +"\n Assim, para salvar o mundo, tens que enfrentar os perigos, armadilhas e inimigos ocultos neste labirinto misterioso." + ConsoleColors.RESET);
+            sleep(500);
+            System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT +"\n Prepara-te Sailor! A tua aventura começa agora...\n" + ConsoleColors.RESET);
+            sleep(500);
+            System.out.println(ConsoleColors.RED_BOLD + "\n｡ ₊°༺❤\uFE0E༻°₊ ｡｡ ₊°༺❤\uFE0E༻°₊ ｡｡ ₊°༺❤\uFE0E༻°₊ ｡\n"+ ConsoleColors.RESET);
+            sleep(2000);
 
 
             labirinto.setSalaAtual(labirinto.getSalaAtual()); // Começa sempre do início
@@ -75,8 +82,8 @@ public class Jogo {
             if (opcao == 1) {
                 //O jogador escolhe a Dificuldade Novamente se quiser jogar novamente com a mesma heroina
                 System.out.println("Escolhe a dificuldade:");
-                System.out.println("1. Fácil");
-                System.out.println("2. Difícil");
+                System.out.println(ConsoleColors.GREEN_BOLD + "1. Fácil \uD83D\uDC4C\uD83C\uDFFC"+ ConsoleColors.RESET);
+                System.out.println(ConsoleColors.RED_BOLD + "2. Difícil \uD83E\uDD2F" + ConsoleColors.RESET);
                 int escolhaDificuldade = scanner.nextInt();
                 if (escolhaDificuldade == 1) {
                     dificuldadeSelecionada = DificuldadeJogo.FACIL;
@@ -105,17 +112,17 @@ public class Jogo {
      */
     private void criarPersonagem(Scanner scanner) {
         System.out.println(" Prepara-te para enfrentar este Labirinto Lunar!\uD83C\uDF19 ");
-        System.out.println("Agora, escolhe a tua heroína:");
-        System.out.println("1. Sailor Moon \uD83C\uDF19");
-        System.out.println("2. Sailor Mercurio \uD83C\uDF15");
-        System.out.println("3. Sailor Marte \uD83D\uDD34");
-        System.out.println("Insere a tua opção:");
+        System.out.println(ConsoleColors.CYAN_BOLD + "Agora, escolhe a tua heroína:" + ConsoleColors.RESET);
+        System.out.println(ConsoleColors.YELLOW + "1. Sailor Moon \uD83C\uDF19" + ConsoleColors.RESET);
+        System.out.println(ConsoleColors.BLUE + "2. Sailor Mercurio \uD83C\uDF15" + ConsoleColors.RESET);
+        System.out.println(ConsoleColors.RED + "3. Sailor Marte \uD83D\uDD34" + ConsoleColors.RESET);
+        System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + "Escolhe a tua Sailor:" + ConsoleColors.RESET);
         int escolhaHeroina = scanner.nextInt();
 
         //Dificuldade do Jogo
-        System.out.println("Escolhe a dificuldade: \uD83D\uDE13");
-        System.out.println("1. Fácil \uD83D\uDC4C\uD83C\uDFFC");
-        System.out.println("2. Difícil \uD83E\uDD2F");
+        System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT+"Escolhe a dificuldade: \uD83D\uDE13"+ConsoleColors.RESET);
+        System.out.println(ConsoleColors.GREEN_BOLD + "1. Fácil \uD83D\uDC4C\uD83C\uDFFC"+ ConsoleColors.RESET);
+        System.out.println(ConsoleColors.RED_BOLD + "2. Difícil \uD83E\uDD2F" + ConsoleColors.RESET);
         int escolhaDificuldade = scanner.nextInt();
         if (escolhaDificuldade == 1) {
             dificuldadeSelecionada = DificuldadeJogo.FACIL;
@@ -134,8 +141,8 @@ public class Jogo {
         }
 
         System.out.println("Tens " + pontosCriacao + " pontos para distribuir.");
-        System.out.println(">>> Cada VIDA vale 1 Ponto");
-        System.out.println(">>> A FORÇA vale 5 pontos).");
+        System.out.println("\uD83D\uDC49 Cada VIDA vale 1.");
+        System.out.println("\uD83D\uDC49 Cada FORÇA vale 5 pontos.");
 
         int vida, forca;
         while (true) {
@@ -169,7 +176,7 @@ public class Jogo {
      * Método que gera e gere o ciclo do labirinto, mostra as salas, sortea eventos e movimenta a heroína.
      * @param scanner Scanner para input do utilizador.
      */
-    private void cicloLabirinto(Scanner scanner) {
+    private void cicloLabirinto(Scanner scanner) throws FileNotFoundException {
         Sala salaAtual = labirinto.getSalaAtual();
 
         while (!labirinto.chegouAoFinal() && heroina.estaViva()) {
@@ -179,18 +186,27 @@ public class Jogo {
             // Sorteia evento apenas se não for vendedor ou final
             if (salaAtual.getEvento() == TipoEvento.VENDEDOR) {
                 vendedor.interagirComHeroina(heroina);
-            } else if (salaAtual.getEvento() == TipoEvento.FINAL) {
+            }  if (labirinto.chegouAoFinal() && heroina.estaViva()) {
                 System.out.println("Encontraste o PORTAL DA LUA! 🌙 GANHASTE O JOGO!");
                 System.out.println(" \uD83C\uDF89 GANHASTE O JOGO! \uD83C\uDFC5");
+
+                FileTools.printFile("AsciiFiles/sailorMoonGanhou.txt");
                 break;
+
             } else {
                 TipoEvento eventoAleatorio = sortearEvento();
                 processarEvento(eventoAleatorio, scanner);
                 if (!heroina.estaViva()) {
                     System.out.println("\uD83D\uDE13 PERDESTEEEE. O jogo terminou! \uD83E\uDD15");
-                    break;
+
+                    FileTools.printFile("AsciiFiles/sailorMoon.txt");
+
                 }
+
+
             }
+
+
 
             //Sempre que termina uma sala, imprimir na consola que pode usar poções antes de avançar
             usarPocaoDepoisSala(scanner);
@@ -210,9 +226,11 @@ public class Jogo {
             }
             System.out.print("Escolhe uma direção: ");
             int escolha = scanner.nextInt();
+            scanner.nextLine();
             Direcao direcao = indiceParaDirecao.get(escolha);
             salaAtual = opcoes.get(direcao);
             labirinto.setSalaAtual(salaAtual);
+
         }
     }
 
@@ -261,7 +279,6 @@ public class Jogo {
                 int ouroGanho = 5 + random.nextInt(11); // Entre 5 e 15
                 System.out.println("Estás com sorte Sailor \uD83C\uDF40");
                 System.out.println("Encontraste " + ouroGanho + " moedas de ouro \uD83E\uDE99 !");
-                System.out.println("Soma e segue!");
                 heroina.setOuro(heroina.getOuro() + ouroGanho);
                 break;
             case SALA_VAZIA:

@@ -1,5 +1,6 @@
 package LabirintoLunar.Itens;
 
+import LabirintoLunar.Cores.ConsoleColors;
 import LabirintoLunar.Enum.TipoHeroina;
 import java.util.ArrayList;
 
@@ -48,7 +49,7 @@ public class ConsumivelCombate extends Consumivel {
           } else {
                System.out.println(heroinasPermitidas);
           }
-          System.out.println("⋆☆✮✪✮☆⋆");
+          System.out.println(ConsoleColors.YELLOW_BOLD_BRIGHT +"⋆☆✮✪✮☆⋆ \n" + ConsoleColors.RESET);
      }
 
 

@@ -1,5 +1,6 @@
 package LabirintoLunar.Itens;
 
+import LabirintoLunar.Cores.ConsoleColors;
 import LabirintoLunar.Enum.TipoHeroina;
 import java.util.ArrayList;
 
@@ -61,7 +62,7 @@ public class Pocao extends Consumivel {
                 "Cura: " + curaVida + " de vida\n" +
                 "Aumento da Fprça: " + aumentoForca + "\n" +
                 "Permitido para:" + permitidoPara + " \n");
-        System.out.println("⋆☆✮✪✮☆⋆");
+        System.out.println(ConsoleColors.YELLOW_BOLD_BRIGHT +"⋆☆✮✪✮☆⋆ \n" + ConsoleColors.RESET);
 
     }
 }
