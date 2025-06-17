@@ -17,30 +17,33 @@ public class Labirinto {
      */
     public Labirinto() {
         // Criação das salas (nomes e descrições à tua escolha)
-        Sala vendedor = new Sala("Sala do Vendedor", "O vendedor misterioso está aqui!", TipoEvento.VENDEDOR);
-        Sala salaA = new Sala("Sala A", "Corredor escuro e silencioso.", TipoEvento.SALA_VAZIA);
-        Sala salaB = new Sala("Sala B", "Uma sala húmida e fria.", TipoEvento.SALA_VAZIA);
-        Sala salaC = new Sala("Sala C", "Ouves ecos de longe.", TipoEvento.SALA_VAZIA);
-        Sala salaD = new Sala("Sala D", "Luz ténue no chão.", TipoEvento.SALA_VAZIA);
-        Sala salaE = new Sala("Sala E", "Paredes cobertas de símbolos.", TipoEvento.SALA_VAZIA);
-        Sala salaF = new Sala("Sala F", "Ar cheiro a incenso.", TipoEvento.SALA_VAZIA);
-        Sala finalSala = new Sala("Portal da Lua", "A saída do Labirinto Lunar!", TipoEvento.FINAL);
+        Sala vendedor = new Sala("Sala do Vendedor", "O vendedor misterioso está aqui! Faz as tuas compras...", TipoEvento.VENDEDOR);
+        Sala salaA = new Sala("Biblioteca Sinistra", "Corredor escuro e silencioso.", TipoEvento.SALA_VAZIA);
+        Sala salaB = new Sala("Escola das Sailors", "Uma sala húmida e fria.", TipoEvento.SALA_VAZIA);
+        Sala salaC = new Sala("Parque Sombrio", "Ouves ecos de longe.", TipoEvento.SALA_VAZIA);
+        Sala salaD = new Sala("Quarto da Bunny", "Luz ténue no chão.", TipoEvento.SALA_VAZIA);
+        Sala salaE = new Sala("Sala Mistica", "Paredes cobertas de símbolos.", TipoEvento.SALA_VAZIA);
+        Sala salaF = new Sala("Jardim das Estrelas", "O aroma lunar esta pelo ar...", TipoEvento.SALA_VAZIA);
+        Sala finalSala = new Sala("Portal da Lua", "Sentes uma força mística!!! É a saída do Labirinto Lunar!", TipoEvento.FINAL);
         this.salaFinal = finalSala;
 
-        // Ligações entre salas conforme diagrama do mapa
+        //Ligações entre salas
         vendedor.ligarSala(Direcao.ESQUERDA, salaA);
         vendedor.ligarSala(Direcao.FRENTE, salaB);
         vendedor.ligarSala(Direcao.DIREITA, salaC);
 
         salaA.ligarSala(Direcao.FRENTE, salaD);
+        salaA.ligarSala(Direcao.ESQUERDA, salaF);
         salaB.ligarSala(Direcao.FRENTE, salaE);
+        salaB.ligarSala(Direcao.DIREITA, salaD);
         salaC.ligarSala(Direcao.FRENTE, salaF);
+        salaC.ligarSala(Direcao.ESQUERDA, salaD);
 
         salaD.ligarSala(Direcao.FRENTE, finalSala);
         salaE.ligarSala(Direcao.FRENTE, finalSala);
         salaF.ligarSala(Direcao.FRENTE, finalSala);
 
-        // A sala inicial é a do vendedor
+        //A sala inicial é a do vendedor
         this.salaAtual = vendedor;
     }
 

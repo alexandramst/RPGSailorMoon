@@ -9,6 +9,8 @@ import LabirintoLunar.Enum.TipoEvento;
 
 import java.util.*;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Classe principal que gere todo o ciclo do RPG "Labirinto Lunar".
  * Faz a ligação entre o labirinto, combate, vendedor, sorteio de eventos e fluxo do jogo.
@@ -43,23 +45,55 @@ public class Jogo {
         Scanner scanner = new Scanner(System.in);
         criarPersonagem(scanner);
 
+
         while (true) {
-            System.out.println("\n🌙=== INÍCIO DO LABIRINTO ===🌙");
+
+            System.out.println("\n🌙 *.*.* INÍCIO DO LABIRINTO *.*.* 🌙");
+
+            System.out.println("\n｡ ₊°༺❤\uFE0E༻°₊ ｡｡ ₊°༺❤\uFE0E༻°₊ ｡｡ ₊°༺❤\uFE0E༻°₊ ｡\n");
+
+            System.out.println("\n Após um estranho eclipse, as forças sombrias tomaram conta da Galáxia do Vazio.");
+
+            System.out.println("\n A única esperança está nas heroínas mágicas, capazes de encontrar o Portal da Lua e restaurar a luz.");
+
+            System.out.println("\n Para salvar o mundo, terás de enfrentar perigos, armadilhas e inimigos ocultos neste labirinto misterioso.");
+
+            System.out.println("\n Prepara-te Sailor! A tua aventura começa agora...\n");
+
+            System.out.println("\n｡ ₊°༺❤\uFE0E༻°₊ ｡｡ ₊°༺❤\uFE0E༻°₊ ｡｡ ₊°༺❤\uFE0E༻°₊ ｡\n");
+
+
             labirinto.setSalaAtual(labirinto.getSalaAtual()); // Começa sempre do início
             cicloLabirinto(scanner);
 
             System.out.println("\nO que queres fazer?");
-            System.out.println("1. Jogar novamente com a mesma heroína");
-            System.out.println("2. Criar uma nova heroína");
-            System.out.println("3. Sair");
+            System.out.println("1. Jogar novamente com a mesma heroína ✨");
+            System.out.println("2. Criar uma nova heroína \uD83E\uDE84");
+            System.out.println("3. Sair \uD83D\uDD1A");
+            System.out.println("Escolhe a tua opção:");
             int opcao = scanner.nextInt();
             if (opcao == 1) {
-                // Repõe vida da heroína para novo jogo
-                heroina.setVidaAtual(heroina.getVidaMax());
+                //O jogador escolhe a Dificuldade Novamente se quiser jogar novamente com a mesma heroina
+                System.out.println("Escolhe a dificuldade:");
+                System.out.println("1. Fácil");
+                System.out.println("2. Difícil");
+                int escolhaDificuldade = scanner.nextInt();
+                if (escolhaDificuldade == 1) {
+                    dificuldadeSelecionada = DificuldadeJogo.FACIL;
+                    heroina.setVidaAtual(300);
+                    heroina.setOuro(20);
+                } else {
+                    dificuldadeSelecionada = DificuldadeJogo.DIFICIL;
+                    heroina.setVidaAtual(220);
+                    heroina.setOuro(15);
+                }
+                //Para limpar o inventário da heroina
+                heroina.getInventario().clear();
+                //Caso o jogador queira escolher outra heroina
             } else if (opcao == 2) {
                 criarPersonagem(scanner);
             } else {
-                System.out.println("Até à próxima! 🌟");
+                System.out.println("Até à próxima! \uD83D\uDC4B 🌟");
                 break;
             }
         }
@@ -70,15 +104,18 @@ public class Jogo {
      * @param scanner Scanner para input.
      */
     private void criarPersonagem(Scanner scanner) {
-        System.out.println("Escolhe a tua heroína:");
-        System.out.println("1. Sailor Moon");
-        System.out.println("2. Sailor Mercurio");
-        System.out.println("3. Sailor Marte");
+        System.out.println(" Prepara-te para enfrentar este Labirinto Lunar!\uD83C\uDF19 ");
+        System.out.println("Agora, escolhe a tua heroína:");
+        System.out.println("1. Sailor Moon \uD83C\uDF19");
+        System.out.println("2. Sailor Mercurio \uD83C\uDF15");
+        System.out.println("3. Sailor Marte \uD83D\uDD34");
+        System.out.println("Insere a tua opção:");
         int escolhaHeroina = scanner.nextInt();
 
-        System.out.println("Escolhe a dificuldade:");
-        System.out.println("1. Fácil");
-        System.out.println("2. Difícil");
+        //Dificuldade do Jogo
+        System.out.println("Escolhe a dificuldade: \uD83D\uDE13");
+        System.out.println("1. Fácil \uD83D\uDC4C\uD83C\uDFFC");
+        System.out.println("2. Difícil \uD83E\uDD2F");
         int escolhaDificuldade = scanner.nextInt();
         if (escolhaDificuldade == 1) {
             dificuldadeSelecionada = DificuldadeJogo.FACIL;
@@ -96,12 +133,15 @@ public class Jogo {
             ouro = 15;
         }
 
-        System.out.println("Tens " + pontosCriacao + " pontos para distribuir (VIDA=1pt, FORÇA=5pt).");
+        System.out.println("Tens " + pontosCriacao + " pontos para distribuir.");
+        System.out.println(">>> Cada VIDA vale 1 Ponto");
+        System.out.println(">>> A FORÇA vale 5 pontos).");
+
         int vida, forca;
         while (true) {
-            System.out.print("VIDA: ");
+            System.out.print("Quantos pontos queres de VIDA: ");
             vida = scanner.nextInt();
-            System.out.print("FORÇA: ");
+            System.out.print("Quantos pontos queres de FORÇA: ");
             forca = scanner.nextInt();
             int total = vida + (forca * 5);
             if (total == pontosCriacao) break;
@@ -126,14 +166,14 @@ public class Jogo {
     }
 
     /**
-     * Gera e gere o ciclo do labirinto, mostrando as salas, sorteando eventos e movimentando a heroína.
+     * Método que gera e gere o ciclo do labirinto, mostra as salas, sortea eventos e movimenta a heroína.
      * @param scanner Scanner para input do utilizador.
      */
     private void cicloLabirinto(Scanner scanner) {
         Sala salaAtual = labirinto.getSalaAtual();
 
         while (!labirinto.chegouAoFinal() && heroina.estaViva()) {
-            System.out.println("\n== Sala Atual: " + salaAtual.getNome() + " ==");
+            System.out.println("\n\uD83D\uDC08\u200D⬛Sala Atual: " + salaAtual.getNome() + " \uD83D\uDC08\u200D⬛");
             System.out.println(salaAtual.getDescricao());
 
             // Sorteia evento apenas se não for vendedor ou final
@@ -141,17 +181,18 @@ public class Jogo {
                 vendedor.interagirComHeroina(heroina);
             } else if (salaAtual.getEvento() == TipoEvento.FINAL) {
                 System.out.println("Encontraste o PORTAL DA LUA! 🌙 GANHASTE O JOGO!");
+                System.out.println(" \uD83C\uDF89 GANHASTE O JOGO! \uD83C\uDFC5");
                 break;
             } else {
                 TipoEvento eventoAleatorio = sortearEvento();
                 processarEvento(eventoAleatorio, scanner);
                 if (!heroina.estaViva()) {
-                    System.out.println("💀 Foste derrotada. O jogo terminou!");
+                    System.out.println("\uD83D\uDE13 PERDESTEEEE. O jogo terminou! \uD83E\uDD15");
                     break;
                 }
             }
 
-            // Sempre que termina a sala, pode usar poções antes de avançar
+            //Sempre que termina uma sala, imprimir na consola que pode usar poções antes de avançar
             usarPocaoDepoisSala(scanner);
 
             // Apresenta as direções possíveis
@@ -159,7 +200,7 @@ public class Jogo {
             if (opcoes.isEmpty()) {
                 break; // Não há mais salas para avançar
             }
-            System.out.println("Caminhos disponíveis:");
+            System.out.println("Este são so teus Caminhos Disponíveis, escolhe um:");
             int i = 1;
             Map<Integer, Direcao> indiceParaDirecao = new HashMap<>();
             for (Map.Entry<Direcao, Sala> entry : opcoes.entrySet()) {
@@ -167,7 +208,7 @@ public class Jogo {
                 indiceParaDirecao.put(i, entry.getKey());
                 i++;
             }
-            System.out.print("Escolhe a direção: ");
+            System.out.print("Escolhe uma direção: ");
             int escolha = scanner.nextInt();
             Direcao direcao = indiceParaDirecao.get(escolha);
             salaAtual = opcoes.get(direcao);
@@ -176,7 +217,7 @@ public class Jogo {
     }
 
     /**
-     * Sorteia um evento aleatório para a sala (exceto vendedor e final).
+     * Método que sorteia um evento aleatório para a sala (exceto vendedor e final).
      * @return TipoEvento sorteado.
      */
     private TipoEvento sortearEvento() {
@@ -207,20 +248,25 @@ public class Jogo {
             case POCAO:
                 Pocao pocaoSala = new Pocao("Poção Misteriosa", 0, new ArrayList<>(), 15, 2);
                 System.out.println("Encontraste uma poção! Foi adicionada ao teu inventário.");
+                System.out.println("Estás com sorte Sailor! Muito bem!");
                 heroina.adicionarItem(pocaoSala);
                 break;
             case ARMADILHA:
-                int dano = 5 + random.nextInt(16); // Entre 5 e 20
+                int dano = 5 + random.nextInt(16); // Dano aleatório quando cai na armadilha entre 5 a 20 de dado.
                 System.out.println("Caíste numa armadilha! Perdes " + dano + " de vida.");
+                System.out.println("Que azar Sailor! ");
                 heroina.receberDano(dano);
                 break;
             case OURO:
                 int ouroGanho = 5 + random.nextInt(11); // Entre 5 e 15
-                System.out.println("Encontraste " + ouroGanho + " moedas de ouro!");
+                System.out.println("Estás com sorte Sailor \uD83C\uDF40");
+                System.out.println("Encontraste " + ouroGanho + " moedas de ouro \uD83E\uDE99 !");
+                System.out.println("Soma e segue!");
                 heroina.setOuro(heroina.getOuro() + ouroGanho);
                 break;
             case SALA_VAZIA:
                 System.out.println("A sala está vazia. Segues em frente.");
+                System.out.println("Será que o perigo está à espreita??? ");
                 break;
             default:
                 System.out.println("Nada acontece.");
@@ -229,7 +275,7 @@ public class Jogo {
     }
 
     /**
-     * Permite ao jogador usar poções no fim de cada sala, antes de avançar.
+     * Método que permite ao jogador usar poções no fim de cada sala, antes de avançar.
      * @param scanner Scanner para input.
      */
     private void usarPocaoDepoisSala(Scanner scanner) {
@@ -248,7 +294,7 @@ public class Jogo {
                 Pocao p = pocoes.get(i);
                 System.out.println((i + 1) + ". " + p.getNome() + " - Cura: " + p.getCuraVida() + " - Força extra: " + p.getAumentoForca());
             }
-            System.out.print("Queres usar alguma poção? (0 para avançar): ");
+            System.out.print("Queres usar alguma poção? (Se não, digita 0 para avançar): ");
             int escolha = scanner.nextInt();
             if (escolha <= 0 || escolha > pocoes.size()) break;
             Pocao pocao = pocoes.get(escolha - 1);

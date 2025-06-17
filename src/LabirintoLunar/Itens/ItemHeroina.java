@@ -20,7 +20,7 @@ public abstract class ItemHeroina {
      * @param nome Nome do item.
      * @param preco Preço em moedas de ouro.
      * @param heroinasPermitidas Lista dos tipos de heroína que podem usar o item.
-     *                          Se a lista estiver vazia, qualquer heroína pode usar.
+     * Se a lista estiver vazia, qualquer heroína pode usar.
      */
     public ItemHeroina(String nome, int preco, ArrayList<TipoHeroina> heroinasPermitidas) {
         this.nome = nome;
@@ -32,13 +32,17 @@ public abstract class ItemHeroina {
      * Devolve o nome do item.
      * @return nome do item
      */
-    public String getNome() { return nome; }
+    public String getNome() {
+        return nome;
+    }
 
     /**
      * Devolve o preço em moedas de ouro.
      * @return preço do item
      */
-    public int getPreco() { return preco; }
+    public int getPreco() {
+        return preco;
+    }
 
     /**
      * Devolve uma cópia da lista dos tipos de heroína que podem usar o item.

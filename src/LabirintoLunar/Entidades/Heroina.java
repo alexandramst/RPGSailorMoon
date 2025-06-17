@@ -92,7 +92,7 @@ public abstract class Heroina extends Entidade {
         System.out.println("🗡️ Arma equipada: " + getNomeArmaOuSemArma());
         System.out.println("🎒 Inventário: " + inventario.size() + " consumíveis");
         System.out.println("✨ Tipo: " + tipo);
-        System.out.println("--------------------------------");
+        System.out.println("\n｡ ₊°༺❤\uFE0E༻°₊ ｡｡ ₊°༺❤\uFE0E༻°₊ ｡\n");
     }
 
     /**

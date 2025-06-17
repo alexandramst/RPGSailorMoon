@@ -44,7 +44,7 @@ public abstract class NPC extends Entidade {
     public void mostrarDetalhes() {
         super.mostrarDetalhes();
         System.out.println("💰 Ouro: " + ouro);
-        System.out.println("--------------------------------");
+        System.out.println("\n｡ ₊°༺❤\uFE0E༻°₊ ｡｡ ₊°༺❤\uFE0E༻°₊ ｡\n");
     }
 
     /**

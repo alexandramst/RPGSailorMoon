@@ -49,11 +49,12 @@ public class ArmaPrincipal extends ItemHeroina {
      */
     @Override
     public void mostrarDetalhes() {
-        System.out.print("🗡️ Arma: " + nome + "\n");
-        System.out.print("Preço: " + preco + " ouro\n");
-        System.out.print("Ataque: " + ataque + "\n");
-        System.out.print("Ataque Especial: " + ataqueEspecial + "\n");
-        System.out.print("Permitido para: ");
+        System.out.print("Arma: " + nome + "\n"+
+                        "Preço: " + preco + " moedas de ouro\n"+
+                        "Ataque: " + ataque + "\n" +
+                        "Ataque Especial: " + ataqueEspecial + "\n" +
+                        "Permitido para: \n");
+        System.out.println("⋆☆✮✪✮☆⋆");
         if (heroinasPermitidas == null || heroinasPermitidas.isEmpty()) {
             System.out.println("Qualquer heroína");
         } else {

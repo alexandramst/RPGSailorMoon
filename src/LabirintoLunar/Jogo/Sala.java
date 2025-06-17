@@ -12,7 +12,7 @@ public class Sala {
     private String nome;
     private String descricao;
     private TipoEvento evento;
-    private Map<Direcao, Sala> ligacoes; // Mapa de direção para Sala vizinha
+    private Map<Direcao, Sala> ligacoes; //Para criar o mapa da direção para Sala vizinha
 
     /**
      * Construtor.

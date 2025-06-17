@@ -35,11 +35,21 @@ public class ConsumivelCombate extends Consumivel {
      /**
       * Mostra na consola os detalhes do consumível de combate.
       */
+
      @Override
      public void mostrarDetalhes() {
-          System.out.println("⚔️ Consumível de Combate: " + nome +
+          System.out.print("Consumivel Combate" +nome +
                   "\nPreço: " + preco +
                   "\nAtaque Instantâneo: " + ataqueInstantaneo +
-                  "\nPermitido para: " + (heroinasPermitidas.isEmpty() ? "Qualquer heroína" : heroinasPermitidas));
+                  "\nPermitido para: ");
+
+          if (heroinasPermitidas.isEmpty()) {
+               System.out.println("Todas as Heroínas 🌠");
+          } else {
+               System.out.println(heroinasPermitidas);
+          }
+          System.out.println("⋆☆✮✪✮☆⋆");
      }
+
+
 }

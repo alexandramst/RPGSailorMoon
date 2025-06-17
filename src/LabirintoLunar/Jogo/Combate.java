@@ -25,7 +25,7 @@ public class Combate {
     public static void combateTurnos(Heroina heroina, NPC inimigo, Scanner scanner) {
         boolean ataqueEspecialUsado = false;
         while (heroina.estaViva() && inimigo.estaViva()) {
-            System.out.println("\n--- Turno da Jogadora ---");
+            System.out.println("\n \uD80C\uDDA9⚝\uD80C\uDDAA Turno da Heroina \uD80C\uDDA9⚝\uD80C\uDDAA");
             imprimirMenuCombate(ataqueEspecialUsado);
 
             System.out.print("Escolhe uma opção: ");
@@ -38,17 +38,17 @@ public class Combate {
                 if (heroina.getArmaPrincipal() != null) {
                     dano = dano + heroina.getArmaPrincipal().getAtaque();
                 }
-                System.out.println("Atacaste com ataque normal! Dano: " + dano);
+                System.out.println("Atacaste com Ataque NORMAL! Dano: " + dano);
                 inimigo.receberDano(dano);
             } else if (escolha == 2) {
                 // Ataque especial (uma vez por combate, precisa de arma)
                 if (!ataqueEspecialUsado && heroina.getArmaPrincipal() != null) {
                     int danoEspecial = heroina.getForca() + heroina.getArmaPrincipal().getAtaqueEspecial();
-                    System.out.println("Atacaste com ataque ESPECIAL! Dano: " + danoEspecial);
+                    System.out.println("Atacaste com Ataque ESPECIAL! Dano: " + danoEspecial);
                     inimigo.receberDano(danoEspecial);
                     ataqueEspecialUsado = true;
                 } else if (ataqueEspecialUsado) {
-                    System.out.println("Ataque especial já foi usado neste combate.");
+                    System.out.println("Este Ataque Especial já foi usado neste combate.");
                     passouTurno = true;
                 } else {
                     System.out.println("Não tens arma principal equipada.");
@@ -114,7 +114,8 @@ public class Combate {
      * @param ataqueEspecialUsado True se o ataque especial já foi usado.
      */
     public static void imprimirMenuCombate(boolean ataqueEspecialUsado) {
-        System.out.println("O que queres fazer?");
+        System.out.println("Estás num combate com o Inimigo das Trevas!!!");
+        System.out.println("O que queres fazer???");
         System.out.println("1. Ataque Normal");
         if (ataqueEspecialUsado) {
             System.out.println("2. Ataque Especial (já usado)");
@@ -147,7 +148,7 @@ public class Combate {
             Pocao p = (Pocao) pocasDisponiveis.get(i);
             System.out.println((i + 1) + ". " + p.getNome() + " - Cura: " + p.getCuraVida() + " - Força extra: " + p.getAumentoForca());
         }
-        System.out.print("Qual poção queres usar? (0 para cancelar): ");
+        System.out.print("Qual poção queres usar? (Imprime 0 para cancelar): ");
         int escolha = scanner.nextInt();
         if (escolha <= 0 || escolha > pocasDisponiveis.size()) return;
         Pocao pocao = (Pocao) pocasDisponiveis.get(escolha - 1);

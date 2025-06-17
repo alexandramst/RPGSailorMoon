@@ -34,25 +34,29 @@ public class Vendedor {
         loja.add(new ArmaPrincipal("Espada Lunar", 30, new ArrayList<>(), 10, 15));
 
         // Item exclusivo da Sailor Moon
-        loja.add(new ArmaPrincipal("Cetro Lunar", 40,
+        loja.add(new ArmaPrincipal("Cetro Lunar", 20,
                 new ArrayList<>(Arrays.asList(TipoHeroina.SAILOR_MOON)), 15, 25));
 
         // Item exclusivo da Sailor Mercurio
-        loja.add(new ArmaPrincipal("Harpão de Gelo", 35,
+        loja.add(new ArmaPrincipal("Harpão de Gelo", 15,
                 new ArrayList<>(Arrays.asList(TipoHeroina.SAILOR_MERCURIO)), 13, 22));
 
         // Item exclusivo da Sailor Marte
-        loja.add(new ConsumivelCombate("Papel de Exorcismo", 18,
+        loja.add(new ConsumivelCombate("Papel de Exorcismo", 8,
                 new ArrayList<>(Arrays.asList(TipoHeroina.SAILOR_MARTE)), 30));
 
         // Item apenas para Mercurio e Marte
-        loja.add(new Pocao("Poção Misteriosa", 14,
+        loja.add(new Pocao("Poção Misteriosa", 4,
                 new ArrayList<>(Arrays.asList(TipoHeroina.SAILOR_MERCURIO, TipoHeroina.SAILOR_MARTE)), 25, 0));
 
-        // Itens extra universais para completar a loja
-        for (int i = 0; i < 7; i++) {
-            loja.add(new Pocao("Poção Extra " + (i + 1), 8 + i, new ArrayList<>(), 10 + i, i));
-        }
+        // Itens extra universais com nomes temáticos
+        loja.add(new Pocao("Poção Lunar", 4, new ArrayList<>(), 10, 1));
+        loja.add(new Pocao("Poção Estelar", 5, new ArrayList<>(), 11, 2));
+        loja.add(new Pocao("Poção da Coragem", 5, new ArrayList<>(), 12, 2));
+        loja.add(new Pocao("Poção do Destino", 6, new ArrayList<>(), 13, 3));
+        loja.add(new Pocao("Poção do Eclipse", 7, new ArrayList<>(), 14, 4));
+        loja.add(new Pocao("Poção do Mistério", 7, new ArrayList<>(), 15, 5));
+        loja.add(new Pocao("Poção da Força Lunar", 8, new ArrayList<>(), 16, 6));
     }
 
     /**
@@ -65,18 +69,31 @@ public class Vendedor {
     }
 
     /**
-     * Mostra até 10 itens disponíveis na loja na ordem atual da lista.
+     * Método que mostra até 10 itens disponíveis na loja na ordem atual da lista.
+     *
      */
     public void imprimirLoja() {
-        System.out.println("\n🛍️ Itens disponíveis na loja:");
-        for (int i = 0; i < Math.min(10, loja.size()); i++) {
-            System.out.print((i + 1) + ". ");
-            loja.get(i).mostrarDetalhes();
+        System.out.println("\n \uD83D\uDED2 Itens disponíveis na loja:");
+        int maxItens = 10;
+        int limite;
+        if (loja.size() < maxItens) {
+            limite = loja.size();
+        } else {
+            limite = maxItens;
+        }
+        for (int i = 0; i < limite; i++) {
+            ItemHeroina item = loja.get(i);
+            String tipo = "Item";
+            if (item instanceof ArmaPrincipal) tipo = "🗡️"; //Arma
+            else if (item instanceof Pocao) tipo = "🧴"; //Poção
+            else if (item instanceof ConsumivelCombate) tipo = "⚔️"; //Comsunivel Combate
+            System.out.print((i + 1) + ". [" + tipo + "] ");
+            item.mostrarDetalhes();
         }
     }
 
     /**
-     * Interage com a heroína, permitindo-lhe comprar itens enquanto desejar
+     * Método que interage com a heroína, permitindo-lhe comprar itens
      * (ou até ficar sem ouro ou sem stock). Após cada compra, o item é removido do stock.
      * Embaralha os itens apenas uma vez no início da visita à loja.
      *
@@ -89,10 +106,11 @@ public class Vendedor {
         // Só embaralha UMA vez, no início da visita!
         Collections.shuffle(loja);
 
+        int maxItens = 10;
         while (continuar && !loja.isEmpty() && heroina.getOuro() > 0) {
             imprimirLoja();
-            System.out.println("\n💬 Tens " + heroina.getOuro() + " de ouro.");
-            System.out.println("👉 Digita o número do item que queres comprar (0 para sair): ");
+            System.out.println("\n💬 Tens " + heroina.getOuro() + " moedas de ouro.");
+            System.out.println("👉 Digita o número do item que queres comprar (Se não quiseres imprime 0 para sair): ");
 
             int opcao;
             try {
@@ -102,10 +120,17 @@ public class Vendedor {
                 continue;
             }
 
+            int limite;
+            if (loja.size() < maxItens) {
+                limite = loja.size();
+            } else {
+                limite = maxItens;
+            }
+
             if (opcao == 0) {
                 System.out.println("👋 Saíste da loja.");
                 continuar = false;
-            } else if (opcao > 0 && opcao <= Math.min(10, loja.size())) {
+            } else if (opcao > 0 && opcao <= limite) {
                 ItemHeroina item = loja.get(opcao - 1);
 
                 if (!item.podeSerUsadoPor(heroina.getTipo())) {
@@ -119,26 +144,17 @@ public class Vendedor {
                         System.out.println("🗡️ Equipaste a arma: " + item.getNome());
                     } else if (item instanceof Consumivel) {
                         heroina.adicionarItem((Consumivel) item);
-                        System.out.println("🎒 Adicionaste ao inventário: " + item.getNome());
+                        System.out.println("\uD83E\uDDFE Adicionaste ao inventário: " + item.getNome());
                     }
                     heroina.setOuro(heroina.getOuro() - item.getPreco());
-                    System.out.println("💰 Restam-te " + heroina.getOuro() + " de ouro.");
-
-                    // Remove o item comprado do stock do vendedor!
+                    System.out.println("💰 Restam-te " + heroina.getOuro() + " moedas de ouro.");
                     loja.remove(item);
-
                 } else {
                     System.out.println("❌ Não tens ouro suficiente.");
                 }
             } else {
                 System.out.println("❌ Opção inválida. Tenta novamente.");
             }
-        }
-
-        if (loja.isEmpty()) {
-            System.out.println("O vendedor já não tem mais itens para vender!");
-        } else if (heroina.getOuro() <= 0) {
-            System.out.println("Ficaste sem ouro!");
         }
     }
 }
